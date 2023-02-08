@@ -21,7 +21,7 @@ public:
             int r2 = cut2==n2 ? INT_MAX:nums2[cut2];
 
             if (l1<=r2 && l2<=r1){ 
-                if((n1+n2)/2==0){
+                if((n1+n2)%2==0){
                     return (max(l1,l2)+min(r1,r2))/2.0;
                 }
 
