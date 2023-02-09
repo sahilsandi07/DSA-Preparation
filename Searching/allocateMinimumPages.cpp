@@ -1,38 +1,101 @@
 class Solution 
+
 {
-    public:     // Time Complexity is O(N*log(sum))
-    
-    bool isFeasible(int arr[],int n,int k, int ans){
-        int req=1,sum=0;
-        for(int i=0;i<n;i++){
-            if(sum+arr[i]>ans){
-                req++;
-                sum=arr[i];
+
+    private:
+
+    bool isPossible(int A[],int N,int M,int mid){
+
+        int studentCount=1;
+
+        int sumOfPages=0;
+
+        for(int i=0;i<N;i++){
+
+            //Assigning pages the student
+
+            if(sumOfPages+A[i]<=mid){
+
+                sumOfPages+=A[i];
+
             }
+
             else{
-                sum+=arr[i];
+
+                studentCount++;
+
+                //if the studentcount becomes greater than the total no of students
+
+                //If the Array element is greater than the mid :- so we cannot assign the book to a student
+
+                //so return false
+
+                if(studentCount>M||A[i]>mid)return false;
+
+                sumOfPages=A[i];
+
             }
+
         }
-        return (req<=k);
+
+        return true;
+
     }
 
-    int findPages(int arr[],int n, int k){
-        int sum=0,mx=0;
-        for(int i=0;i<n;i++){
-            sum+=arr[i];
-            mx=max(mx,arr[i]);
-        }
-        int low=mx,high=sum,res=0;
-        
-        while(low<=high){
-            int mid=(low+high)/2;
-            if(isFeasible(arr,n,k,mid)){
-                res=mid;
-                high=mid-1;
-            }else{
-                low=mid+1;
+    public:
+
+    //Function to find minimum number of pages.
+
+    int findPages(int A[], int N, int M) 
+
+    {
+
+        //No of students are more than the no of books
+
+        if(M>N)return -1;
+
+        //search space is between 0 to sum of the array elements
+
+        int start=0;
+
+        int end=0;
+
+        for(int i=0;i<N;i++)end+=A[i];
+
+        int mid=start+(end-start)/2;
+
+        int ans=-1;
+
+        while(start<=end){
+
+            if(isPossible(A,N,M,mid)){
+
+                //store the ans
+
+                ans=mid;
+
+                //as we requried the minimum ans so going into the left-part
+
+                end=mid-1;
+
             }
+
+            else{
+
+                //the ans does not exists in the left-part
+
+                start=mid+1;
+
+            }
+
+            mid=start+(end-start)/2;
+
         }
-        return res;
+
+        return ans;
+
+        
+
     }
+
 };
