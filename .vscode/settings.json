@@ -1,3 +1,11 @@
 {
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "array": "cpp",
+        "fstream": "cpp",
+        "functional": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "tuple": "cpp"
+    }
 }
