@@ -20,6 +20,7 @@ void printArray(int arr[], int n){
         cout<<arr[i]<<" ";
     }
 }
+
 int main(){
     int arr[] = {12,3,4,53,2,1};
     int n = sizeof(arr)/sizeof(arr[0]);
