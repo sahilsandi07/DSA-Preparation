@@ -12,7 +12,7 @@ void merge(int arr1[], int arr2[], int n, int m){
         merged[i] = arr1[i];
     }
 
-    //copy elements of array 2 to vector merged for position n-1 t0 m
+    //copy elements of array 2 to vector merged for position n t0 m
     int j=n;
     for (int i=0; i<m; i++){
         merged[j] = arr2[i];
