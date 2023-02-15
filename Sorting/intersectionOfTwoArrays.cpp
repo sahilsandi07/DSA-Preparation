@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//Naive Approach  
+// Time Complexity: O(n*m)
+
 void intersection(int a[], int b[], int n, int m){
     for (int i=0; i<n; i++){
         if (i>0 && a[i]==a[i-1]){
