@@ -4,6 +4,7 @@ class Solution{
     //railway station such that no train waits.
     int findPlatform(int arr[], int dep[], int n)
     {
+		//sort the arrays arrival and departure
     	sort(arr, arr+n);
     	sort(dep, dep+n);
     	
