@@ -56,6 +56,56 @@ int main(){
         cout << arr[i] << " ";
     }cout << endl;
 
+    cout << endl;
+
+    cout << "Printing Max Heap Using Priority Queue" << endl;
+
+    // Max Heap
+
+    priority_queue<int> pq;
+    pq.push(1);
+    pq.push(4);
+    pq.push(3);
+    pq.push(2);
+    pq.push(12);
+    pq.push(13);
+
+    cout << "Element at top is: " << pq.top() <<endl;
+    pq.pop();
+    cout << "Modified Element at top is: " << pq.top() <<endl;
+    cout << "Size is: " << pq.size() << endl;
+    if (pq.empty()){
+        cout << "Queue is Empty!" << endl;
+    }
+    else{
+        cout <<"Queue is not Empty!" << endl; 
+    }
+
+    // Min Heap 
+    cout << endl;
+    cout << "Printing Min Heap using Priority Queue" << endl;
+
+    priority_queue<int, vector<int>, greater<int>> mih;
+    mih.push(1);
+    mih.push(4);
+    mih.push(3);
+    mih.push(2);
+    mih.push(12);
+    mih.push(13);
+
+    cout << "Element at top is: " << mih.top() <<endl;
+    mih.pop();
+    cout << "Modified Element at top is: " << mih.top() <<endl;
+    cout << "Size is: " << mih.size() << endl;
+    if (mih.empty()){
+        cout << "Queue is Empty!" << endl;
+    }
+    else{
+        cout <<"Queue is not Empty!" << endl; 
+    }
+
+
+
     return 0;
 
 }
