@@ -4,8 +4,8 @@ using namespace std;
 void heapify(int arr[], int n, int i){
 
     int largest = i;
-    int left_index = 2*i;
-    int right_index = 2*i + 1;
+    int left_index = 2*i + 1;
+    int right_index = 2*i + 2;
 
     if (left_index < n && arr[largest] < arr[left_index]){
         largest = left_index;
@@ -24,14 +24,14 @@ void heapify(int arr[], int n, int i){
 
 int main(){
 
-    int arr[6] = {-1, 54, 53, 55, 52, 50};
-    int n = 5;
+    int arr[] = {54, 53, 55, 52, 50, 123};
+    int n = sizeof(arr)/sizeof(arr[0]);
 
-    for (int i=n/2; i>0; i--){
+    for (int i=n/2 - 1; i>=0; i--){
         heapify(arr, n, i);
     }
 
-    for (int i=1; i<=n; i++){
+    for (int i=0; i<n; i++){
         cout << arr[i] << " ";
     }cout << endl;
 
