@@ -1,143 +1,81 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-struct HashNode {
-    int key;
-    int value;
+struct MyHash
+{
+    int *arr;
+    int cap,size;
+    
+    MyHash(int c)
+    {
+        cap=c;
+        size=0;
+        arr=new int[cap];
+        for(int i=0;i<cap;i++)
+            arr[i]=-1;
+    }
+    
+    int hash(int key){
+        return key%cap;
+    }
+    bool insert(int key)
+    {
+        if(size==cap)
+            return false;
+        int i=hash(key);
+        while(arr[i]!=-1 && arr[i]!=-2 && arr[i]!=key)
+            i=(i+1)%cap;
+        if(arr[i]==key)
+            return false;
+        else{
+            arr[i]=key;
+            size++;
+            return true;
+        }
+    }
+    bool search(int key)
+    {
+        int h=hash(key);
+        int i=h;
+        while(arr[i]!=-1){
+            if(arr[i]==key)
+                return true;
+            i=(i+1)%cap;
+            if(i==h)
+                return false;
+        }
+        return false;
+    }
+    bool erase(int key)
+    {   
+        int h=hash(key);
+        int i=h;
+        while(arr[i]!=-1){
+            if(arr[i]==key){
+                arr[i]=-2;
+                return true;
+            }
+            i=(i+1)%cap;
+            if(i==h)
+                return false;
+        }
+        return false;
+    }
 };
 
-const int capacity = 20;
-int size = 0;
-
-struct HashNode** arr;
-struct HashNode* dummy;
-
-// Function to add key value pair
-void insert(int key, int V)
-{
-
-    struct HashNode* temp
-        = (struct HashNode*)malloc(sizeof(struct HashNode));
-    temp->key = key;
-    temp->value = V;
-
-    // Apply hash function to find
-    // index for given key
-    int hashIndex = key % capacity;
-
-    // Find next free space
-    while (arr[hashIndex] != NULL
-           && arr[hashIndex]->key != key
-           && arr[hashIndex]->key != -1) {
-        hashIndex++;
-        hashIndex %= capacity;
-    }
-
-    // If new node to be inserted
-    // increase the current size
-    if (arr[hashIndex] == NULL || arr[hashIndex]->key == -1)
-        size++;
-
-    arr[hashIndex] = temp;
-}
-
-// Function to delete a key value pair
-int deleteKey(int key)
-{
-    // Apply hash function to find
-    // index for given key
-    int hashIndex = key % capacity;
-
-    // Finding the node with given
-    // key
-    while (arr[hashIndex] != NULL) {
-        // if node found
-        if (arr[hashIndex]->key == key) {
-            // Insert dummy node here
-            // for further use
-            arr[hashIndex] = dummy;
-
-            // Reduce size
-            size--;
-
-            // Return the value of the key
-            return 1;
-        }
-        hashIndex++;
-        hashIndex %= capacity;
-    }
-
-    // If not found return null
-    return 0;
-}
-
-// Function to search the value
-// for a given key
-int find(int key)
-{
-    // Apply hash function to find
-    // index for given key
-    int hashIndex = (key % capacity);
-
-    int counter = 0;
-
-    // Find the node with given key
-    while (arr[hashIndex] != NULL) {
-
-        int counter = 0;
-        // If counter is greater than
-        // capacity
-        if (counter++ > capacity)
-            break;
-
-        // If node found return its
-        // value
-        if (arr[hashIndex]->key == key)
-            return arr[hashIndex]->value;
-
-        hashIndex++;
-        hashIndex %= capacity;
-    }
-
-    // If not found return
-    // -1
-    return -1;
-}
-
-// Driver Code
-int main()
-{
-    // Space allocation
-    arr = (struct HashNode**)malloc(sizeof(struct HashNode*)
-                                    * capacity);
-    // Assign NULL initially
-    for (int i = 0; i < capacity; i++)
-        arr[i] = NULL;
-
-    dummy
-        = (struct HashNode*)malloc(sizeof(struct HashNode));
-
-    dummy->key = -1;
-    dummy->value = -1;
-
-    insert(1, 5);
-    insert(2, 15);
-    insert(3, 20);
-    insert(4, 7);
-    if (find(4) != -1)
-        cout << "Value of Key 4 = " << find(4) << endl;
+int main() 
+{ 
+    MyHash mh(7);
+    mh.insert(49);
+    mh.insert(56);
+    mh.insert(72);
+    if(mh.search(56)==true)
+       cout<<"Yes"<<endl;
     else
-        cout << ("Key 4 does not exists\n");
-
-    if (deleteKey(4))
-        cout << ("Node value of key 4 is deleted "
-                 "successfully\n");
-    else {
-        cout << ("Key does not exists\n");
-    }
-
-    if (find(4) != -1)
-        cout << ("Value of Key 4 = %d\n", find(4));
+        cout<<"No"<<endl;
+    mh.erase(56);
+    if(mh.search(56)==true)
+        cout<<"Yes"<<endl;
     else
-        cout << ("Key 4 does not exists\n");
-}
+        cout<<"No"<<endl;
+} 
