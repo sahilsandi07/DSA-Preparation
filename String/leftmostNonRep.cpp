@@ -21,7 +21,6 @@ int leftMostNonRep(string str){
             res = min(res, fI[i]);
         }
     }
-
     return (res == INT_MAX) ? -1 : res;
 }
 
