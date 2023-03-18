@@ -26,13 +26,16 @@ public:
     void add(int x) // insert elements in the linked list
     {
         Node *temp = new Node(x);
-        if (head == nullptr) {
+        if (head == nullptr)
+        {
             head = temp;
             head->next = head;
         }
-        else {
+        else
+        {
             Node *p = head;
-            while (p->next != head) {
+            while (p->next != head)
+            {
                 p = p->next;
             }
             p->next = temp;
@@ -80,7 +83,8 @@ public:
         {
             Node *temp = head;
             Node *p = head;
-            while (p->next != head) {
+            while (p->next != head)
+            {
                 p = p->next;
             }
             head = head->next;
