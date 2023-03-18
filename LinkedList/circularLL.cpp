@@ -10,6 +10,21 @@ struct Node{
     }
 };
 
+void print(Node* head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+
+    Node* p = head;
+
+    do{
+        cout << p->data << " ";
+        p = p->next;
+    } while (p != head);
+}
+
 int main() 
 { 
 	Node *head=new Node(10);
@@ -17,5 +32,6 @@ int main()
 	head->next->next=new Node(20);
 	head->next->next->next=new Node(15);
 	head->next->next->next->next=head;
+    print(head);
 	return 0;
 } 
