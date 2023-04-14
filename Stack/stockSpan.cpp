@@ -1,28 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void printSpan(int arr[], int n)
+vector<int> calculateSpan(int price[], int n)
 {
+    vector<int> span;
+    stack<pair<int, int>> st;
 
-    stack<int> s;
-    s.push(0);
-    cout << 1 << " ";
-    for (int i = 1; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        while (s.empty() == false && arr[s.top()] <= arr[i])
+        int days = 1;
+        while (!st.empty() && st.top().first <= price[i])
         {
-            s.pop();
+            days += st.top().second;
+            st.pop();
         }
-        int span = s.empty() ? i + 1 : i - s.top();
-        cout << span << " ";
-        s.push(i);
+
+        st.push({price[i], days});
+        span.push_back(days);
     }
+
+    return span;
 }
 
 int main()
 {
     int arr[] = {18, 12, 13, 14, 11, 16};
     int n = 6;
-    printSpan(arr, n);
+    vector<int> ans = calculateSpan(arr, n);
+    for (auto it:  ans)
+    {
+        cout << it << " ";
+    }
     return 0;
 }
