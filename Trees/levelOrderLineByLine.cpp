@@ -13,7 +13,7 @@ struct Node
     }
 };
 
-void printLevel(Node *root)
+void method1(Node *root)
 {
     if (root == NULL)
         return;
@@ -42,6 +42,40 @@ void printLevel(Node *root)
     }
 }
 
+void method2 (Node* root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    queue<Node*> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        int cnt = q.size();
+
+        for (int i=0; i<cnt; i++)
+        {
+            Node* curr = q.front();
+            q.pop();
+            cout << curr->key << " ";
+
+            if (curr -> left != NULL)
+            {
+                q.push(curr -> left);
+            }
+
+            if (curr -> right != NULL)
+            {
+                q.push(curr -> right);
+            }
+        }
+
+        cout << "\n";
+    }
+}
+
 int main()
 {
 
@@ -53,5 +87,9 @@ int main()
     root->right->left = new Node(60);
     root->right->right = new Node(70);
 
-    printLevel(root);
+    cout << "Printing Level Order Line By Line By Method1: \n";
+    method1(root);
+    cout << "\n";
+    cout << "Printing Level Order Line By Line By Method2: \n";
+    method2(root);
 }
