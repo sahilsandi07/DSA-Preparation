@@ -12,6 +12,7 @@ class Solution
         // q = ({row, col}, time)
         queue<pair <pair<int, int> , int>> q;
         int visited[n][m];
+        int cntFresh = 0;
         
         for (int i=0; i<n; i++) {
             for (int j=0; j<m; j++) {
@@ -22,12 +23,14 @@ class Solution
                 else {
                     visited[i][j] = 0;
                 }
+                if (grid[i][j] == 1) cntFresh++;
             }
         }
         
         int delRow[] = {-1, 0, 1, 0};
         int delCol[] = {0, 1, 0, -1};
         int tm = 0;
+        int cnt = 0;
         
         while (!q.empty()) {
             int r = q.front().first.first;
@@ -44,17 +47,12 @@ class Solution
                 && visited[nrow][ncol] == 0 && grid[nrow][ncol] == 1) {
                     q.push({{nrow, ncol}, t + 1});
                     visited[nrow][ncol] = 2;
+                    cnt ++;
                 }
             }
         }
         
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<m; j++) {
-                if (visited[i][j] != 2 && grid[i][j] ==1) {
-                    return -1;
-                }
-            }
-        }
+        if (cnt != cntFresh) return -1;
         
         return tm;
     }
