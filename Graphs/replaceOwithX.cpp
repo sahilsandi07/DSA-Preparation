@@ -1,6 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Time And Space Complexity
+// in the worst case if matrix has all O's
+// then the dfs will traverse for O(N*M x 4) + O(N) for boundary traversal
+// the worst case Space Complexity will be O(N x M)
+
 class Solution{
 private:
     void dfs (int row, int col, vector<vector<int>> &vis, vector<vector<char>> &mat) {
