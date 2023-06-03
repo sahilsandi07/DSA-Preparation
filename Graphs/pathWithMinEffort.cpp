@@ -5,9 +5,11 @@ class Solution {
   public:
     int MinimumEffort(vector<vector<int>>& grid) {
         // step 1 : Create a priority queue
-        priority_queue< pair<int, pair<int, int>>, 
+        priority_queue< 
+                        pair<int, pair<int, int>>, 
                         vector<pair<int, pair<int, int>>>,
-                        greater<pair<int, pair<int, int>>>> pq;
+                        greater<pair<int, pair<int, int>>>
+                      > pq;
         
         // step 2 : Create a Distance 2D vector
         int n = grid.size();
