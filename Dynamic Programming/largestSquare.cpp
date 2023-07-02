@@ -69,6 +69,33 @@ private:
         
         return dp[0][0];
     }
+
+    int solveTabSO (vector<vector<int>> &mat, int &maxi) {
+        int row = mat.size();
+        int col = mat[0].size();
+        
+        vector<int> curr (col + 1, 0);
+        vector<int> next (col + 1, 0);
+        
+        for (int i=row - 1; i>=0; i--) {
+            for (int j=col - 1; j>=0; j--) {
+                int right = curr[j+1];
+                int dia = next[j+1];
+                int down = next[j];
+                
+                if (mat[i][j] == 1) {
+                    curr[j] = 1 + min (right, min (dia, down));
+                    maxi = max (maxi, curr[j]);
+                }
+                else {
+                    curr[j] = 0;
+                }
+            }
+            next = curr;
+        }
+        
+        return 1;
+    }
 public:
     int maxSquare(int n, int m, vector<vector<int>> mat){
         // 1 -> Recursion
@@ -83,8 +110,13 @@ public:
         // return maxi;
         
         // 3 -> Tabulation
+        // int maxi = 0;
+        // solveTab (mat, maxi);
+        // return maxi;
+
+        // 4 -> Space Optimisation
         int maxi = 0;
-        solveTab (mat, maxi);
+        solveTabSO (mat, maxi);
         return maxi;
     }
 };
