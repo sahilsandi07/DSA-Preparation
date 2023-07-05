@@ -1,5 +1,5 @@
 class Solution {
-public:
+private:
     int solveRec (vector<int>& values, int i, int j) {
         // base case
         if (i+1 == j) {
@@ -46,6 +46,7 @@ public:
 
         return dp[0][n-1];
     }
+public:
 
     int minScoreTriangulation(vector<int>& values) {
         // 1 -> Recursion
